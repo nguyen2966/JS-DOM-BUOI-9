@@ -10,9 +10,7 @@ export const excercises = [
     ],
     "activate": "Tính lương",
     calculateSalary: (dailySalary, numOfDays) => {
-      if (Number.isNaN(dailySalary) || Number.isNaN(numOfDays)) return "Số liệu không hợp lệ";
-
-      if (numOfDays < 0 || dailySalary < 0) return "Số liệu không hợp lệ";
+      if(!validateNumber(dailySalary) || !validateNumber(numOfDays)) return "Dữ liệu không hợp lệ";
 
       numOfDays = Number(numOfDays);
       dailySalary = Number(dailySalary);
@@ -36,7 +34,7 @@ export const excercises = [
       let sum = 0;
       console.log(nums);
       for (let num of nums) {
-        if (num == '' || Number.isNaN(num)) return "Số liệu không hợp lệ";
+        if (!validateNumber(num)) return "Số liệu không hợp lệ";
         num = Number(num);
         sum += num;
       }
@@ -53,9 +51,7 @@ export const excercises = [
     ],
     "activate": "Quy đổi",
     calculateCurrency: (usdAmount) => {
-      if (Number.isNaN(usdAmount) || Number.isNaN(usdAmount)) return "Số liệu không hợp lệ";
-
-      if (usdAmount < 0) return "Số liệu không hợp lệ";
+     if(!validateNumber(usdAmount)) return "Dữ liệu không hợp lệ";
 
       usdAmount = Number(usdAmount);
 
