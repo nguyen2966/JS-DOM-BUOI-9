@@ -74,6 +74,9 @@ body{
       font-size: 32px;
       line-height: 1.2;
     }
+    .exercise-detail.exercise-transition{
+      animation: exercise-enter 0.35s ease-out both;
+    }
     .exercise-title{
       display: flex;
       align-items: center;
@@ -149,7 +152,27 @@ body{
       border: 1px solid #bbf7d0;
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(22, 101, 52, 0.08);
+      &.exercise-transition{
+        animation: exercise-enter 0.35s 0.06s ease-out both;
+      }
     }
+  }
+}
+
+@keyframes exercise-enter{
+  from{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .exercise-transition{
+    animation: none !important;
   }
 }
 

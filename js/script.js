@@ -3,6 +3,7 @@ import { excercises } from "./exercies.js";
 const selectButtons = document.querySelectorAll(".select");
 const title = document.querySelector(".exercise-title");
 const inputBlock = document.querySelector(".excercise-inputs");
+const exerciseDetail = document.querySelector(".exercise-detail");
 const resultBlock = document.querySelector(".exercise-result");
 const calculateBtn = document.querySelector(".calculate");
 const exerciseStatesKey = "exerciseStates";
@@ -33,6 +34,7 @@ function selectExercise(index) {
   clearContent();
   changeButtonIcon(index);
   renderContent(index);
+  playExerciseTransition();
 }
 
 function changeButtonIcon(index){
@@ -140,5 +142,19 @@ function getExerciseState(index) {
 
 function saveExerciseStates() {
   localStorage.setItem(exerciseStatesKey, JSON.stringify(exerciseStates));
+}
+
+function playExerciseTransition() {
+  [exerciseDetail, resultBlock].forEach((block) => {
+    if (!block) return;
+
+    block.classList.remove("exercise-transition");
+    void block.offsetWidth;
+    block.classList.add("exercise-transition");
+
+    block.addEventListener("animationend", () => {
+      block.classList.remove("exercise-transition");
+    }, { once: true });
+  });
 }
 

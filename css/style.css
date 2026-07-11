@@ -73,6 +73,9 @@ body {
   font-size: 32px;
   line-height: 1.2;
 }
+.container .content .exercise-detail.exercise-transition {
+  animation: exercise-enter 0.35s ease-out both;
+}
 .container .content .exercise-title {
   display: flex;
   align-items: center;
@@ -109,9 +112,6 @@ body {
   border-radius: 10px;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
-}
-.container .content .excercise-inputs input::-moz-placeholder {
-  color: #64748b;
 }
 .container .content .excercise-inputs input::placeholder {
   color: #64748b;
@@ -152,7 +152,25 @@ body {
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(22, 101, 52, 0.08);
 }
+.container .content .exercise-result.exercise-transition {
+  animation: exercise-enter 0.35s 0.06s ease-out both;
+}
 
+@keyframes exercise-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .exercise-transition {
+    animation: none !important;
+  }
+}
 @media (max-width: 700px) {
   .container {
     margin: 20px auto;
@@ -181,4 +199,4 @@ body {
   .container .content .excercise-inputs input {
     width: 100%;
   }
-}
+}/*# sourceMappingURL=style.css.map */
