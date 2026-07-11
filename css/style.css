@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto";
+}
+
+.container {
+  width: 60%;
+  height: 80vh;
+  margin: 100px 300px;
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  border-radius: 10px;
+}
+.container .sidebar {
+  width: 15%;
+  height: 100%;
+  background-color: rgb(244, 236, 236);
+}
+.container .sidebar .sidebar-content {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+.container .sidebar .sidebar-content button {
+  width: 80%;
+  height: 40px;
+}
+.container .content {
+  width: 85%;
+  height: 100%;
+  background-color: aqua;
+  padding-left: 20px;
+}
+.container .content .exercise-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+.container .content .exercise-title .title {
+  color: rgb(90, 90, 90);
+}
+.container .content .excercise-inputs {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+.container .content .excercise-inputs input {
+  width: 30%;
+  min-height: 40px;
+  padding-left: 5px;
+  border-radius: 10px;
+  border: none;
+}
+.container .content .calculate {
+  background-color: rgb(101, 101, 218);
+  color: white;
+  font-size: 16px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: none;
+  transition: all 0.5s;
+  margin-bottom: 30px;
+}
+.container .content .calculate:hover {
+  transform: scale(0.9);
+}
+.container .content .exercise-result {
+  width: 80%;
+  height: 40px;
+  background-color: rgb(149, 236, 149);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding-left: 10px;
+  border-radius: 10px;
+}/*# sourceMappingURL=style.css.map */
