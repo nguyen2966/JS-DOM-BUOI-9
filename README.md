@@ -1,6 +1,6 @@
 # Phân tích Mô hình 3 khối
 
-Dự án bao gồm 5 bài tập JavaScript cơ bản. Mỗi bài được phân tích theo mô hình **3 khối (Input - Process - Output)** trước khi cài đặt chức năng. Các phép tính và kiểm tra dữ liệu được hiện thực trong `exercies.js`. :contentReference[oaicite:0]{index=0}
+Dự án bao gồm 5 bài tập JavaScript cơ bản. Mỗi bài được phân tích theo mô hình **3 khối (Input - Process - Output)** trước khi cài đặt chức năng. Các phép tính và kiểm tra dữ liệu được hiện thực trong `exercies.js`.
 
 ---
 
@@ -147,4 +147,4 @@ Thực hiện tính toán
 Hiển thị kết quả lên giao diện
 ```
 
-Ngoài ra, dự án sử dụng một hàm `validateNumber()` để kiểm tra dữ liệu đầu vào trước khi xử lý, đảm bảo chỉ chấp nhận các giá trị số hợp lệ và không âm. :contentReference[oaicite:1]{index=1}
+Ngoài ra, dự án sử dụng một hàm `validateNumber()` để kiểm tra dữ liệu đầu vào trước khi xử lý, đảm bảo chỉ chấp nhận các giá trị số hợp lệ và không âm. 
