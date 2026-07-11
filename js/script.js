@@ -5,6 +5,8 @@ const title = document.querySelector(".exercise-title");
 const inputBlock = document.querySelector(".excercise-inputs");
 const resultBlock = document.querySelector(".exercise-result");
 const calculateBtn = document.querySelector(".calculate");
+const exerciseStatesKey = "exerciseStates";
+const exerciseStates = loadExerciseStates();
 let currentExerciseIndex = 0;
 
 if (selectButtons.length) {
@@ -55,6 +57,7 @@ function clearContent() {
 
 function renderContent(index) {
   const exercise = excercises[index];
+  const savedState = getExerciseState(index);
 
   if (title) {
     const titleP = title.querySelector(".title");
@@ -69,12 +72,19 @@ function renderContent(index) {
     inputForm.type = "number";
     inputForm.id = `input-${i}`;
     inputForm.placeholder = input;
+    inputForm.value = savedState.inputs[i] ?? "";
+    inputForm.addEventListener("input", () => {
+      savedState.inputs[i] = inputForm.value;
+      saveExerciseStates();
+    });
     inputBlock.appendChild(inputForm);
   });
 
   if (calculateBtn) {
     calculateBtn.innerText = exercise.activate;
   }
+
+  resultBlock.querySelector("p").innerText = savedState.result ?? "";
 }
 
 function calculateResult() {
@@ -96,5 +106,39 @@ function calculateResult() {
   }
 
   resultBlock.querySelector("p").innerText = result;
+
+  const currentState = getExerciseState(currentExerciseIndex);
+  currentState.inputs = values;
+  currentState.result = result;
+  saveExerciseStates();
+}
+
+function loadExerciseStates() {
+  try {
+    const savedStates = JSON.parse(localStorage.getItem(exerciseStatesKey));
+    return Array.isArray(savedStates) ? savedStates : [];
+  } catch {
+    return [];
+  }
+}
+
+function getExerciseState(index) {
+  const savedState = exerciseStates[index];
+
+  if (!savedState || typeof savedState !== "object" || Array.isArray(savedState)) {
+    exerciseStates[index] = {
+      inputs: [],
+      result: "",
+    };
+  } else {
+    if (!Array.isArray(savedState.inputs)) savedState.inputs = [];
+    if (savedState.result === undefined) savedState.result = "";
+  }
+
+  return exerciseStates[index];
+}
+
+function saveExerciseStates() {
+  localStorage.setItem(exerciseStatesKey, JSON.stringify(exerciseStates));
 }
 
