@@ -1,3 +1,6 @@
 export function validateNumber(num){
-  return !(Number.isNaN(num) || num < 0);
+  if (typeof num === "string" && num.trim() === "") return false;
+
+  const value = Number(num);
+  return Number.isFinite(value) && value >= 0;
 }

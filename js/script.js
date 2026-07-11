@@ -4,35 +4,45 @@ const selectButtons = document.querySelectorAll(".select");
 const title = document.querySelector(".exercise-title");
 const inputBlock = document.querySelector(".excercise-inputs");
 const resultBlock = document.querySelector(".exercise-result");
-const contentBlock = document.querySelector(".content");
+const calculateBtn = document.querySelector(".calculate");
+let currentExerciseIndex = 0;
 
-if (selectButtons) {
+if (selectButtons.length) {
   selectButtons.forEach((button, index) => {
     button.addEventListener("click", () => {
-      clearContent();
-      changeButtonIcon(button,index);
-      renderContent(index);
-    })
-  })
+      selectExercise(index);
+    });
+  });
+
+  const savedIndex = Number(localStorage.getItem("lastBtnIndex"));
+  const initialIndex = Number.isInteger(savedIndex) && savedIndex >= 0 && savedIndex < excercises.length
+    ? savedIndex
+    : 0;
+
+  selectExercise(initialIndex);
 }
 
-function changeButtonIcon(button, index){
-   const iEle = button.querySelector("i");
-   iEle.classList = "fa-solid fa-book-open";
+if (calculateBtn) {
+  calculateBtn.addEventListener("click", calculateResult);
+}
 
-   const lastBtnIndex = localStorage.getItem("lastBtnIndex");
+function selectExercise(index) {
+  currentExerciseIndex = index;
+  clearContent();
+  changeButtonIcon(index);
+  renderContent(index);
+}
 
-   if(lastBtnIndex && lastBtnIndex != index){
-    const lastBtn = selectButtons[lastBtnIndex];
-    console.log(lastBtn);
-    lastBtn.classList.remove("active");
-    lastBtn.classList.add("in-active");
-    const iEle = lastBtn.querySelector("i");
-    iEle.classList = "fa-solid fa-book";
-   }
+function changeButtonIcon(index){
+  selectButtons.forEach((button, buttonIndex) => {
+    const isActive = buttonIndex === index;
+    button.classList.toggle("active", isActive);
+    button.querySelector("i").className = isActive
+      ? "fa-solid fa-book-open"
+      : "fa-solid fa-book";
+  });
 
-   localStorage.setItem("lastBtnIndex", index);
-
+  localStorage.setItem("lastBtnIndex", index);
 }
 
 function clearContent() {
@@ -47,7 +57,6 @@ function renderContent(index) {
   const exercise = excercises[index];
 
   if (title) {
-    console.log(title);
     const titleP = title.querySelector(".title");
     titleP.innerText = exercise.title;
     
@@ -63,34 +72,29 @@ function renderContent(index) {
     inputBlock.appendChild(inputForm);
   });
 
-  const calculateBtn = document.querySelector(".calculate");
-
   if (calculateBtn) {
     calculateBtn.innerText = exercise.activate;
-    calculateBtn.addEventListener("click", () => {
-      const inputs = inputBlock.querySelectorAll(":scope > input");
-      let res;
-
-      if (index == 0) {
-        res = exercise.calculateSalary(inputs[0].value, inputs[1].value);
-      }
-      else if (index == 1) {
-        let inputsArr = [...inputs];
-        const values = inputsArr.map(input => input.value);
-        console.log(values);
-        res = exercise.calculateAverage(values);
-      } else if(index == 2){
-        res = exercise.calculateCurrency(inputs[0].value);
-      } else if(index == 3){
-        res = exercise.calculateRectangle(inputs[0].value, inputs[1].value);
-      } else if(index == 4){
-        res = exercise.calculate2Digits(inputs[0].value);
-      }
-
-      const resultBlock = document.querySelector(".exercise-result");
-      const resP = resultBlock.querySelector("p");
-      resP.innerText = res;
-    })
   }
+}
+
+function calculateResult() {
+  const exercise = excercises[currentExerciseIndex];
+  const values = [...inputBlock.querySelectorAll(":scope > input")]
+    .map(input => input.value);
+  let result;
+
+  if (currentExerciseIndex === 0) {
+    result = exercise.calculateSalary(values[0], values[1]);
+  } else if (currentExerciseIndex === 1) {
+    result = exercise.calculateAverage(values);
+  } else if (currentExerciseIndex === 2) {
+    result = exercise.calculateCurrency(values[0]);
+  } else if (currentExerciseIndex === 3) {
+    result = exercise.calculateRectangle(values[0], values[1]);
+  } else if (currentExerciseIndex === 4) {
+    result = exercise.calculate2Digits(values[0]);
+  }
+
+  resultBlock.querySelector("p").innerText = result;
 }
 

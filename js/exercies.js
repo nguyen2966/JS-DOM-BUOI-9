@@ -32,14 +32,12 @@ export const excercises = [
     "activate": "Tính trung bình",
     calculateAverage: (nums) => {
       let sum = 0;
-      console.log(nums);
       for (let num of nums) {
         if (!validateNumber(num)) return "Số liệu không hợp lệ";
         num = Number(num);
         sum += num;
       }
-      console.log(sum);
-      return (sum / 5).toFixed(2);
+      return (sum / nums.length).toFixed(2);
     },
   },
 
@@ -56,7 +54,7 @@ export const excercises = [
       usdAmount = Number(usdAmount);
 
       let vndAmount = usdAmount * 23500;
-      vndAmount = new Intl.NumberFormat('vn-VN').format(vndAmount);
+      vndAmount = new Intl.NumberFormat('vi-VN').format(vndAmount);
 
       return vndAmount;
     },
@@ -93,9 +91,9 @@ export const excercises = [
 
       if(num < 10 || num >=100 ) return "Dữ liệu phải là số có 2 chữ số nguyên";
 
-      if(num - parseInt(num) > 0) return "Dữ liệu phải là số nguyên";
-
       num = Number(num);
+
+      if(!Number.isInteger(num)) return "Dữ liệu phải là số nguyên";
 
       let res = (num % 10) + parseInt(num/10);
       return res;
